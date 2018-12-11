@@ -88,19 +88,27 @@ public class LoginFragment extends Fragment {
                 } else {
                     // not empty
                     SQLiteDatabase sqLiteDatabase =  getActivity().openOrCreateDatabase("my.db", MODE_PRIVATE, null);
-                    String sql = String.format("SELECT username, password FROM user where password='%s'", stringPassword);
+                    String sql = String.format("SELECT username, name FROM user where password='%s'", stringPassword);
                     Cursor cs = sqLiteDatabase.rawQuery(sql, null);
 
                     if(cs.moveToNext()) {
                         String uname = cs.getString(0);
-                        String passwd = cs.getString(1);
+                        String name = cs.getString(1);
                         //query success
                         Log.d("login", uname);
                         SharedPreferences sp = getActivity().getSharedPreferences("login", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sp.edit();
                         editor.putString("username", uname).apply();
+                        String[] arrayName = name.split(" ");
+                        editor.putString("firstname", arrayName[0]);
+                        editor.putString("lastname", arrayName[1]);
                         editor.commit();
                         Toast.makeText(getActivity(), "Login success", Toast.LENGTH_SHORT).show();
+                        getActivity()
+                                .getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.main_view, new HomeFragment())
+                                .commit();
                     } else {
                         Toast.makeText(getActivity(), "Invalid user or password", Toast.LENGTH_SHORT).show();
                     }
