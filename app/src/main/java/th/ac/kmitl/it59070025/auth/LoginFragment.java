@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import th.ac.kmitl.it59070025.R;
+import th.ac.kmitl.it59070025.home.HomeFragment;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -37,6 +38,7 @@ public class LoginFragment extends Fragment {
 
         onClickLogin();
         onClickRegister();
+        checkState();
     }
 
     public void checkState() {
@@ -44,6 +46,13 @@ public class LoginFragment extends Fragment {
         String state = sp.getString("username", null);
 
         // redirect
+        if (state != null) {
+            getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_view, new HomeFragment())
+                    .commit();
+        }
     }
 
     public void onClickRegister() {
