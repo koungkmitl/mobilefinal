@@ -54,4 +54,12 @@
         app:layout_constraintStart_toEndOf="@+id/home_static2"
         app:layout_constraintTop_toBottomOf="@+id/home_firstname" />
 
+    <ListView
+        android:id="@+id/home_list"
+        android:layout_width="match_parent"
+        android:layout_height="573dp"
+        android:layout_marginTop="168dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp"></ListView>
+
 </android.support.constraint.ConstraintLayout>

@@ -88,7 +88,7 @@ public class LoginFragment extends Fragment {
                 } else {
                     // not empty
                     SQLiteDatabase sqLiteDatabase =  getActivity().openOrCreateDatabase("my.db", MODE_PRIVATE, null);
-                    String sql = String.format("SELECT username, name FROM user where password='%s'", stringPassword);
+                    String sql = String.format("SELECT username, name FROM user where password='%s' and username='%s'", stringUsername, stringPassword);
                     Cursor cs = sqLiteDatabase.rawQuery(sql, null);
 
                     if(cs.moveToNext()) {
