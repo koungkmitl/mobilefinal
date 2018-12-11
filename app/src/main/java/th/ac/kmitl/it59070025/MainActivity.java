@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        createDatabase();
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()

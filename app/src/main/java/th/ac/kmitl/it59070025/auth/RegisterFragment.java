@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,6 +52,7 @@ public class RegisterFragment extends Fragment {
 
                 if (validated) {
                     // inject to sqlite
+                    Log.d("login", "validate passed");
                     ContentValues cv = new ContentValues();
                     cv.put("username", stringUsername);
                     cv.put("name", stringName);
@@ -62,8 +64,17 @@ public class RegisterFragment extends Fragment {
                     sqLiteDatabase.insert("user", null, cv);
 
                     sqLiteDatabase.close();
+                    cv.clear();
+
                     Toast.makeText(getActivity(), "registed", Toast.LENGTH_SHORT).show();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.main_view, new LoginFragment())
+                            .addToBackStack(null)
+                            .commit();
                 } else {
+                    Log.d("login", "validate failure");
                     Toast.makeText(getActivity(), "failed", Toast.LENGTH_SHORT).show();
                 }
             }
