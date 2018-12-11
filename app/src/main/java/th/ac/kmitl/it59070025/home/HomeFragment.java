@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +54,11 @@ public class HomeFragment extends Fragment {
     public void setName() {
 
         SharedPreferences sp = getActivity().getSharedPreferences("login", MODE_PRIVATE);
-        EditText fname = getView().findViewById(R.id.home_firstname);
-        EditText lname = getView().findViewById(R.id.home_lastname);
+        TextView fname = getView().findViewById(R.id.home_firstname);
+        TextView lname = getView().findViewById(R.id.home_lastname);
         // setname
+        fname.setText(sp.getString("firstname", ""));
+        lname.setText(sp.getString("lastname", ""));
 
     }
 
@@ -79,6 +82,7 @@ public class HomeFragment extends Fragment {
                             .getSupportFragmentManager()
                             .beginTransaction()
                             .replace(R.id.main_view, new ProfileFragment())
+                            .addToBackStack(null)
                             .commit();
                 } else if (position == 1) {
                     // myfriend
@@ -86,6 +90,8 @@ public class HomeFragment extends Fragment {
                     // signout
                     SharedPreferences sp = getActivity().getSharedPreferences("login", MODE_PRIVATE);
                     SharedPreferences.Editor editor = sp.edit();
+                    Log.d("login", sp.getString("firstname", "error"));
+                    Log.d("login", sp.getString("lastname", "error2"));
                     editor.remove("username");
                     editor.apply();
 
