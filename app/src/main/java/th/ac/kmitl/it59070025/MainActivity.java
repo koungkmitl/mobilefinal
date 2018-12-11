@@ -3,6 +3,8 @@ package th.ac.kmitl.it59070025;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import th.ac.kmitl.it59070025.auth.LoginFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
